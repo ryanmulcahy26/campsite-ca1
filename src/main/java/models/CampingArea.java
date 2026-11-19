@@ -3,12 +3,12 @@ package models;
 import datastructure.LinkedList;
 
 public class CampingArea {
-    private String identifier;
+    private String areaidentifier;
     private String description;
     private LinkedList<Plot> plots = new LinkedList<>();
 
     public CampingArea(String identifier, String description){
-        this.identifier = identifier;
+        this.areaidentifier = identifier;
         this.description = description;
     }
 
@@ -34,7 +34,7 @@ public class CampingArea {
     }
 
     // getters
-    public String getIdentifier() { return identifier; }
+    public String getAreaidentifier() { return areaidentifier; }
     public String getDescription() { return description; }
     public LinkedList<Plot> getPlots() { return plots; }
 }
