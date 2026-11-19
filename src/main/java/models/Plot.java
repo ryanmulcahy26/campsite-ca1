@@ -1,13 +1,75 @@
 package models;
 
+import datastructure.LinkedList;
+
 public class Plot {
-    private String identifier;
-    private String type;
+    private String plotIdentifier;
+    private PlotType type;
     private boolean hasPower;
     private double size;
     private int bedrooms;
     private int beds;
-    private String facilities;
     private double costPerNight;
     private String photoUrl;
+    private LinkedList<String> facilities = new LinkedList<>(); // will be able to add facilities and remove
+    private LinkedList<Booking> bookings = new LinkedList<>(); // will be able to add and remove bookings
+
+    public Plot(String identifier, PlotType type, boolean hasPower, double size, int bedrooms,
+                int beds, double costPerNight, String photoUrl){
+        this.plotIdentifier = identifier;
+        this.type = type;
+        this.hasPower = type.isStatic() ? true : hasPower; // all static plots have power
+        this.size = size;
+        // only static plots will have beds and bedrooms
+        this.bedrooms = type.isStatic() ? bedrooms : 0;
+        this.beds = type.isStatic() ? beds : 0;
+        this.costPerNight = costPerNight;
+        this.photoUrl = photoUrl;
+    }
+
+    // add a facility to the plot
+    public void addFacility(String facility){
+        facilities.add(facility);
+    }
+
+    // getters
+    public String getPlotIdentifier() {
+        return plotIdentifier;
+    }
+
+    public PlotType getType(){
+        return type;
+    }
+
+    public boolean getHasPower() {
+        return hasPower;
+    }
+
+    public double getSize(){
+        return size;
+    }
+
+    public int getBedrooms(){
+        return bedrooms;
+    }
+
+    public int getBeds(){
+        return beds;
+    }
+
+    public double getCostPerNight() {
+        return costPerNight;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public LinkedList<String> getFacilities() {
+        return facilities;
+    }
+
+    public LinkedList<Booking> getBookings() {
+        return bookings;
+    }
 }
