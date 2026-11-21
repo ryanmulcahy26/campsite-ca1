@@ -1,6 +1,8 @@
 package models;
 
 import datastructure.LinkedList;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Plot {
     private String plotIdentifier;
@@ -30,6 +32,44 @@ public class Plot {
     // add a facility to the plot
     public void addFacility(String facility){
         facilities.add(facility);
+    }
+
+    // true if no existing booking clashes with the dates given
+    public boolean isAvailable(LocalDate start, LocalDate end){
+        LinkedList.Node<Booking> current = bookings.getHead();
+        while(current != null){
+            if(current.getData().collisions(start, end)){
+                return false;    //clashes
+            }
+            current = current.getNext();
+        }
+        return true;  //managed to walk whole list without any clashes
+    }
+
+    // check if the plot matches all the preference criteria given
+    public boolean matches(BookingPreferences prefs, LocalDate start, LocalDate end){
+        //check if stay is more than 1 night
+        if(!end.isAfter(start)){
+            return false;
+        }
+        if(prefs.needsPower() && !hasPower){
+            return false;
+        }
+        if(size < prefs.getMinSize()){
+            return false;
+        }
+        if(bedrooms < prefs.getMinBedrooms()){
+            return false;
+        }
+        if(type.isStatic() && beds < prefs.getNumGuests()){
+            return false;
+        }
+        //budget = total for whole stay, compare against cost * nights
+        long nights = ChronoUnit.DAYS.between(start, end);
+        if(costPerNight * nights > prefs.getBudget()){
+            return false;
+        }
+        return isAvailable(start, end);
     }
 
     // getters
