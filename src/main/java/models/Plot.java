@@ -34,6 +34,18 @@ public class Plot {
         facilities.add(facility);
     }
 
+    //check if plot offers a facility
+    public boolean hasFacility(String facility){
+        LinkedList.Node<String> current = facilities.getHead();
+        while(current != null){
+            if(current.getData().equalsIgnoreCase(facility)){
+                return true;
+            }
+            current = current.getNext();
+        }
+        return false;
+    }
+
     // true if no existing booking clashes with the dates given
     public boolean isAvailable(LocalDate start, LocalDate end){
         LinkedList.Node<Booking> current = bookings.getHead();
@@ -59,6 +71,9 @@ public class Plot {
             return false;
         }
         if(bedrooms < prefs.getMinBedrooms()){
+            return false;
+        }
+        if(type != prefs.getType()){
             return false;
         }
         if(type.isStatic() && beds < prefs.getNumGuests()){

@@ -15,7 +15,7 @@ public class Booking {
                    Guest guest, Plot plot, BookingPreferences preferences) {
         this.startDate = startDate;
         this.endDate = endDate;
-        this.identifier = this.identifier;
+        this.identifier = identifier;
         this.guest = guest;
         this.plot = plot;
         this.preferences = preferences;
