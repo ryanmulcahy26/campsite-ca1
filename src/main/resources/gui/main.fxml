@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<TabPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="controllers.MainController" tabClosingPolicy="UNAVAILABLE">
+    <tabs>
+        <Tab text="Add campsite">
+            <content>
+                <VBox spacing="8">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15"/>
+                    </padding>
+                    <Label text="Name"/>
+                    <TextField fx:id="nameField"/>
+                    <Label text="Address"/>
+                    <TextField fx:id="addressField"/>
+                    <Label text="Contact information"/>
+                    <TextField fx:id="contactField"/>
+                    <Label text="Stars"/>
+                    <ComboBox fx:id="starsBox"/>
+                    <CheckBox fx:id="restaurant" text="Restaurant"/>
+                    <CheckBox fx:id="pool" text="Swimming pool"/>
+                    <Button text="Add campsite" onAction="#onAddCampsite"/>
+                    <Label fx:id="statusLabel"/>
+                </VBox>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
